@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TentangRouteImport } from './routes/tentang'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ChatIndexRouteImport } from './routes/chat.index'
+import { Route as ChatThreadIdRouteImport } from './routes/chat.$threadId'
+import { Route as KursusIndexRouteImport } from './routes/kursus.index'
+import { Route as KursusCourseIdIndexRouteImport } from './routes/kursus.$courseId.index'
+import { Route as KursusCourseIdLessonIdRouteImport } from './routes/kursus.$courseId.$lessonId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TentangRoute = TentangRouteImport.update({
+  id: '/tentang',
+  path: '/tentang',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatIndexRoute = ChatIndexRouteImport.update({
+  id: '/chat/',
+  path: '/chat/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatThreadIdRoute = ChatThreadIdRouteImport.update({
+  id: '/chat/$threadId',
+  path: '/chat/$threadId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KursusIndexRoute = KursusIndexRouteImport.update({
+  id: '/kursus/',
+  path: '/kursus/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KursusCourseIdIndexRoute = KursusCourseIdIndexRouteImport.update({
+  id: '/kursus/$courseId/',
+  path: '/kursus/$courseId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KursusCourseIdLessonIdRoute = KursusCourseIdLessonIdRouteImport.update({
+  id: '/kursus/$courseId/$lessonId',
+  path: '/kursus/$courseId/$lessonId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/tentang': typeof TentangRoute
+  '/api/chat': typeof ApiChatRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
+  '/chat/': typeof ChatIndexRoute
+  '/kursus/': typeof KursusIndexRoute
+  '/kursus/$courseId/$lessonId': typeof KursusCourseIdLessonIdRoute
+  '/kursus/$courseId/': typeof KursusCourseIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/tentang': typeof TentangRoute
+  '/api/chat': typeof ApiChatRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
+  '/chat': typeof ChatIndexRoute
+  '/kursus': typeof KursusIndexRoute
+  '/kursus/$courseId/$lessonId': typeof KursusCourseIdLessonIdRoute
+  '/kursus/$courseId': typeof KursusCourseIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/tentang': typeof TentangRoute
+  '/api/chat': typeof ApiChatRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
+  '/chat/': typeof ChatIndexRoute
+  '/kursus/': typeof KursusIndexRoute
+  '/kursus/$courseId/$lessonId': typeof KursusCourseIdLessonIdRoute
+  '/kursus/$courseId/': typeof KursusCourseIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/tentang'
+    | '/api/chat'
+    | '/chat/$threadId'
+    | '/chat/'
+    | '/kursus/'
+    | '/kursus/$courseId/$lessonId'
+    | '/kursus/$courseId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/tentang'
+    | '/api/chat'
+    | '/chat/$threadId'
+    | '/chat'
+    | '/kursus'
+    | '/kursus/$courseId/$lessonId'
+    | '/kursus/$courseId'
+  id:
+    | '__root__'
+    | '/'
+    | '/tentang'
+    | '/api/chat'
+    | '/chat/$threadId'
+    | '/chat/'
+    | '/kursus/'
+    | '/kursus/$courseId/$lessonId'
+    | '/kursus/$courseId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TentangRoute: typeof TentangRoute
+  ApiChatRoute: typeof ApiChatRoute
+  ChatThreadIdRoute: typeof ChatThreadIdRoute
+  ChatIndexRoute: typeof ChatIndexRoute
+  KursusIndexRoute: typeof KursusIndexRoute
+  KursusCourseIdLessonIdRoute: typeof KursusCourseIdLessonIdRoute
+  KursusCourseIdIndexRoute: typeof KursusCourseIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tentang': {
+      id: '/tentang'
+      path: '/tentang'
+      fullPath: '/tentang'
+      preLoaderRoute: typeof TentangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat/': {
+      id: '/chat/'
+      path: '/chat'
+      fullPath: '/chat/'
+      preLoaderRoute: typeof ChatIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat/$threadId': {
+      id: '/chat/$threadId'
+      path: '/chat/$threadId'
+      fullPath: '/chat/$threadId'
+      preLoaderRoute: typeof ChatThreadIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kursus/': {
+      id: '/kursus/'
+      path: '/kursus'
+      fullPath: '/kursus/'
+      preLoaderRoute: typeof KursusIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kursus/$courseId/': {
+      id: '/kursus/$courseId/'
+      path: '/kursus/$courseId'
+      fullPath: '/kursus/$courseId/'
+      preLoaderRoute: typeof KursusCourseIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kursus/$courseId/$lessonId': {
+      id: '/kursus/$courseId/$lessonId'
+      path: '/kursus/$courseId/$lessonId'
+      fullPath: '/kursus/$courseId/$lessonId'
+      preLoaderRoute: typeof KursusCourseIdLessonIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TentangRoute: TentangRoute,
+  ApiChatRoute: ApiChatRoute,
+  ChatThreadIdRoute: ChatThreadIdRoute,
+  ChatIndexRoute: ChatIndexRoute,
+  KursusIndexRoute: KursusIndexRoute,
+  KursusCourseIdLessonIdRoute: KursusCourseIdLessonIdRoute,
+  KursusCourseIdIndexRoute: KursusCourseIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
