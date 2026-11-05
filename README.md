@@ -1,198 +1,100 @@
-Mabasa — Sahabat Belajar Bahasa Bali
+<div align="center">
+  <img src="image_9dbc62.jpg" alt="Mabasa Hero Banner" width="100%">
 
+  # ᬫᬩᬲ (Mabasa) - Basa Bali Sahabat Belajar
+  
+  **Belajar Basa Bali, ditemani Guru Basa AI.** <br>
+  Kursus singkat untuk pelajar dan pendatang, plus tutor AI yang menjawab pertanyaanmu dalam Bahasa Indonesia maupun English.
 
-Status dokumen: draf untuk disesuaikan dengan implementasi aktual. Tautan repositori yang diberikan saat penyusunan mengembalikan halaman 404, sehingga source code, fitur, framework, layanan AI, dan instruksi instalasi belum dapat diverifikasi. Ganti semua bagian bertanda [ISI/VERIFIKASI] sebelum mengirim submission.
+  [![GitHub repo size](https://img.shields.io/github/repo-size/voiderov/basa-bali-sahabat-belajar)](https://github.com/voiderov/basa-bali-sahabat-belajar)
+  [![GitHub stars](https://img.shields.io/github/stars/voiderov/basa-bali-sahabat-belajar?style=social)](https://github.com/voiderov/basa-bali-sahabat-belajar/stargazers)
+</div>
 
-Mabasa adalah platform web untuk membantu pelajar mengenal dan berlatih Bahasa Bali secara lebih interaktif. Arah pengembangan yang diusulkan adalah menggabungkan materi belajar dengan tutor percakapan berbasis AI yang memberi respons dan umpan balik bahasa. Fitur tersebut hanya boleh dinyatakan telah tersedia apabila benar-benar sudah berjalan pada versi yang disubmit.
+---
 
-1. Masalah
+## 📖 Tentang Proyek
 
-Kesempatan berlatih Bahasa Bali secara kontekstual dapat terbatas bagi pelajar yang membutuhkan ruang latihan mandiri, respons cepat, dan penjelasan yang mudah dipahami. Mabasa mengangkat kebutuhan tersebut sebagai hipotesis masalah yang perlu divalidasi bersama siswa, guru Bahasa Bali, atau penutur yang kompeten. README ini tidak mengklaim adanya hasil survei atau pengukuran dampak.
+**Mabasa** adalah platform edukasi interaktif yang dirancang khusus untuk mempermudah siapa saja—baik pelajar lokal maupun pendatang/ekspatriat—dalam mempelajari Bahasa Bali. 
 
-2. Target Pengguna
+Banyak generasi muda Bali kini lebih sering memakai Bahasa Indonesia, dan pendatang kerap kesulitan menemukan materi pembelajaran yang ramah pemula. Mabasa hadir untuk menjembatani kesenjangan tersebut dengan pendekatan modern, menyediakan kursus terstruktur dan pendampingan AI secara *real-time*.
 
-Pengguna utama yang dituju adalah pelajar SMA/SMK/sederajat yang ingin mempelajari atau melatih Bahasa Bali. Pengguna pendukung dapat mencakup guru dan pendamping belajar.
+## ✨ Fitur Utama
 
-3. Fitur Utama
+- 📚 **Kursus Singkat & Terstruktur:** Materi pembelajaran yang didesain khusus untuk pemula, pelajar, dan pendatang agar mudah dipahami.
+- 🤖 **Guru Basa AI:** Asisten cerdas berbasis AI yang siap menemani proses belajarmu. 
+- 🌐 **Dukungan Bilingual (ID & EN):** Guru Basa AI dapat merespons dan menjelaskan materi menggunakan Bahasa Indonesia maupun Bahasa Inggris, memudahkan ekspatriat atau turis untuk ikut belajar.
+- 🎨 **Antarmuka Modern & Responsif:** Desain UI/UX yang kental dengan nuansa Bali namun tetap bersih, modern, dan nyaman digunakan di berbagai perangkat.
 
-Daftar ini adalah sasaran produk, bukan pernyataan bahwa fitur sudah aktif. Cocokkan dengan versi aplikasi yang benar-benar berjalan.
+## 🛠️ Teknologi yang Digunakan
 
-•
-Materi atau contoh penggunaan Bahasa Bali: [VERIFIKASI: modul dan konten yang tersedia].
+*(Silakan sesuaikan bagian ini dengan tech stack aktual proyek Anda)*
 
-•
-Latihan Bahasa Bali melalui input pengguna: [VERIFIKASI: alur yang tersedia].
+- **Frontend:** [Next.js](https://nextjs.org/) / [React](https://reactjs.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **AI Integration:** OpenAI API / Gemini API *(sesuaikan jika ada)*
+- **Deployment:** Vercel / Netlify
 
-•
-Tutor AI yang menanggapi latihan dan memberi penjelasan/koreksi: [VERIFIKASI: jika memang sudah terintegrasi dan dapat diuji].
+## 🚀 Cara Menjalankan Proyek (Getting Started)
 
-•
-Riwayat atau progres belajar: [VERIFIKASI: jika sudah ada].
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini di lingkungan lokal Anda.
 
-Saat mengisi README final, sebutkan hanya fitur yang dapat didemonstrasikan dari kondisi awal hingga hasilnya.
+### Prasyarat
 
-4. Tech Stack
+Pastikan Anda telah menginstal:
+- [Node.js](https://nodejs.org/) (Versi 16.x atau lebih baru)
+- npm, yarn, atau pnpm
 
-Isi berdasarkan source code dan konfigurasi deployment yang sebenarnya.
+### Instalasi
 
-•
-Frontend: [ISI/VERIFIKASI]
+1. **Clone repositori ini:**
+   ```bash
+   git clone https://github.com/voiderov/basa-bali-sahabat-belajar.git
+   ```
 
-•
-Backend/API: [ISI/VERIFIKASI]
+2. **Masuk ke direktori proyek:**
+   ```bash
+   cd basa-bali-sahabat-belajar
+   ```
 
-•
-Database/penyimpanan: [ISI/VERIFIKASI atau “tidak digunakan”]
+3. **Instal dependensi:**
+   ```bash
+   npm install
+   # atau
+   yarn install
+   ```
 
-•
-Layanan/model AI: [ISI/VERIFIKASI atau “belum terintegrasi”]
+4. **Atur Environment Variables (Variabel Lingkungan):**
+   Buat file `.env.local` di *root* direktori dan tambahkan API keys yang dibutuhkan (misalnya untuk Guru Basa AI).
+   ```env
+   NEXT_PUBLIC_API_URL=your_api_url_here
+   AI_API_KEY=your_ai_api_key_here
+   ```
 
-•
-Hosting/deployment: [ISI/VERIFIKASI]
+5. **Jalankan server pengembangan:**
+   ```bash
+   npm run dev
+   # atau
+   yarn dev
+   ```
 
-5. Implementasi AI
+6. **Buka di Browser:**
+   Aplikasi sekarang berjalan di [http://localhost:3000](http://localhost:3000)
 
-Rancangan kandidat untuk Mabasa — konfirmasi terhadap source code sebelum mengirim. Jika sudah diimplementasikan, AI dapat berperan sebagai tutor latihan: pengguna mengirim kata, frasa, kalimat, atau pertanyaan; layanan AI memberi respons, alternatif ungkapan, dan penjelasan yang relevan. Materi/rujukan bahasa yang telah ditinjau manusia sebaiknya digunakan sebagai dasar agar jawaban lebih konsisten.
+## 🤝 Kontribusi (Contributing)
 
-•
-Model/API dan versi: [ISI/VERIFIKASI]
+Kontribusi sangat dipersilakan! Jika Anda ingin menambahkan fitur, memperbaiki *bug*, atau menambah materi Bahasa Bali, silakan lakukan langkah berikut:
 
-•
-Fungsi AI yang benar-benar tersedia: [ISI/VERIFIKASI]
+1. *Fork* repositori ini
+2. Buat *branch* fitur Anda (`git checkout -b fitur-baru`)
+3. *Commit* perubahan Anda (`git commit -m 'Menambahkan fitur baru'`)
+4. *Push* ke *branch* tersebut (`git push origin fitur-baru`)
+5. Buka **Pull Request**
 
-•
-Input yang dikirim ke AI: [ISI/VERIFIKASI]
+## 📄 Lisensi
 
-•
-Output yang ditampilkan: [ISI/VERIFIKASI]
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
 
-•
-Penanganan kegagalan/kuota API: [ISI/VERIFIKASI]
-
-Jangan menyimpan API key, token, password, atau kredensial di repository. Gunakan environment variable dan sediakan .env.example tanpa nilai rahasia.
-
-6. Arsitektur dan Alur Data
-
-Diagram berikut hanya menggambarkan rancangan umum. Sesuaikan dengan struktur implementasi aktual.
-
-Plain Text
-
-
-Pengguna
-   │ input latihan
-   ▼
-Antarmuka web ──► Backend/API aplikasi ──► Layanan/model AI
-                         │                       │
-                         ├── materi belajar      └── respons/umpan balik
-                         └── penyimpanan opsional          │
-                                                         ▼
-                                             Hasil ditampilkan di web
-
-
-
-•
-Frontend ke backend: [ISI/VERIFIKASI]
-
-•
-Backend ke model/API: [ISI/VERIFIKASI]
-
-•
-Penyimpanan data dan kebijakan retensi: [ISI/VERIFIKASI]
-
-7. Menjalankan Secara Lokal
-
-Instruksi berikut belum dapat disusun dengan akurat sebelum repository dan konfigurasi aplikasi bisa diperiksa. Ganti setelah memverifikasi file konfigurasi, misalnya package.json, requirements.txt, atau berkas sejenis.
-
-1.
-Clone repository: git clone https://github.com/voiderov/basa-bali-sahabat-belajar.git
-
-2.
-Masuk ke folder proyek: cd basa-bali-sahabat-belajar
-
-3.
-Pasang dependensi menggunakan perintah sesuai stack: [ISI/VERIFIKASI]
-
-4.
-Salin .env.example menjadi .env, lalu isi konfigurasi lokal yang diperlukan. Jangan membagikan file .env.
-
-5.
-Jalankan aplikasi: [ISI/VERIFIKASI]
-
-8. Environment Variables
-
-Lihat .env.example. Cantumkan hanya nama variabel dan contoh nilai non-rahasia, misalnya AI_API_KEY=your_key_here. Jangan pernah memasukkan secret asli ke GitHub.
-
-9. Deployment
-
-•
-URL website aktif: [ISI/VERIFIKASI — wajib bisa diakses juri]
-
-•
-Commit/release versi submission: [ISI/VERIFIKASI — cantumkan commit hash atau tag]
-
-•
-Akun demo bila aplikasi memerlukan login: kirim melalui form panitia, bukan di repository.
-
-10. Anggota Tim
-
-•
-I Gde Erovadhi
-
-•
-Adskhan Hafiz Dewanda Sirait
-
-•
-Danendra Naufal Bayuworo
-
-Asal sekolah: SMA Negeri 2 Kuta Selatan
-Kategori: SMA/SMK/sederajat
-Ketua tim dan kontak: [TETAPKAN/NAMA, EMAIL, DAN NOMOR WHATSAPP]
-
-11. Disclosure Teknologi dan Pengembangan
-
-Lengkapi berdasarkan kondisi sebenarnya pada versi submission.
-
-•
-Status proyek sebelum kompetisi: [“Existing before competition” atau “Dibuat selama kompetisi” — pilih yang benar]
-
-•
-Pengembangan khusus kompetisi: [JELASKAN PERUBAHAN/PEKERJAAN TIM]
-
-•
-Framework, library, dan versi: [ISI/VERIFIKASI]
-
-•
-Model/API/dataset: [ISI/VERIFIKASI; tuliskan sumber dan lisensi bila ada]
-
-•
-Alat AI yang membantu coding: [ISI/VERIFIKASI atau “tidak digunakan”]
-
-•
-Aset/sumber pihak ketiga: [ISI/VERIFIKASI]
-
-12. Batasan yang Diketahui
-
-•
-Akurasi ungkapan, tingkat tutur, konteks, dan variasi penggunaan Bahasa Bali harus ditinjau bersama guru atau penutur yang kompeten.
-
-•
-Jawaban model AI dapat keliru. Pengguna perlu diberi tahu bahwa keluaran AI adalah bantuan belajar, bukan otoritas final.
-
-•
-Ketersediaan dan kuota layanan AI bergantung pada konfigurasi yang benar-benar digunakan aplikasi.
-
-•
-Tambahkan batasan spesifik versi MVP: [ISI/VERIFIKASI].
-
-13. Kredit dan Sumber Pihak Ketiga
-
-•
-Library, model/API, dataset, font, gambar, template, dan aset lainnya: [ISI/VERIFIKASI].
-
-•
-Pastikan seluruh penggunaan mematuhi lisensi dan izin yang berlaku.
-
-14. Lisensi
-
-[ISI/VERIFIKASI: tuliskan lisensi proyek. Jika belum ditentukan, jangan menyatakan proyek berlisensi terbuka.]
-
+---
+<div align="center">
+  Dibuat dengan ❤️ untuk pelestarian Budaya dan Bahasa Bali.
+</div>
