@@ -14,7 +14,7 @@ const inputSchema = z.object({
 export const koreksiTerjemahan = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => inputSchema.parse(input))
   .handler(async ({ data }): Promise<KoreksiResult> => {
-    const { createChatCall, describeAiError } = await import("./gateway.server");
+    const { chatAttempts, describeAiError, firstOutputOrError } = await import("./gateway.server");
     const instructions = `Anda adalah pemeriksa latihan Basa Bali untuk pelajar pemula.
 Tugas: nilai terjemahan pelajar dari Bahasa Indonesia ke Basa Bali.
 Terima variasi yang benar (sinonim, tingkat bahasa lain yang masih tepat, ejaan wajar, huruf besar/kecil, tanda baca) sebagai benar.
@@ -25,19 +25,26 @@ Baris berikutnya: umpan balik 1-3 kalimat dalam Bahasa Indonesia, sebutkan bagia
 Contoh jawaban guru: "${data.reference}"
 Jawaban pelajar: "${data.answer}"`;
 
-    try {
-      const request = new Request("https://local/koreksi");
-      const call = createChatCall(request, [{ role: "user", content: userText }], instructions);
-      if (!call) return { ok: false, error: "Konfigurasi AI belum lengkap di server." };
-      const text = (await call.result.text).trim();
-      const _unused = (await result.text).trim();
-      if (!text) return { ok: false, error: "AI tidak memberikan jawaban. Coba lagi." };
-      const [first, ...rest] = text.split("\n");
-      const head = (first ?? "").toUpperCase();
-      const verdict: KoreksiVerdict = head.includes("BENAR") ? "benar" : head.includes("HAMPIR") ? "hampir" : "salah";
-      return { ok: true, verdict, feedback: rest.join("\n").trim() || text };
-    } catch (error) {
-      console.error("Koreksi error", error);
-      return { ok: false, error: describeAiError(error).message };
+    const request = new Request("https://local/koreksi");
+    const attempts = chatAttempts(request, [{ role: "user", content: userText }], instructions);
+    if (attempts.length === 0) return { ok: false, error: "Konfigurasi AI belum lengkap di server." };
+
+    let lastError: unknown = null;
+    for (const attempt of attempts) {
+      try {
+        const result = attempt.start();
+        const early = await firstOutputOrError(result);
+        if (early !== null) throw early;
+        const text = (await result.text).trim();
+        if (!text) throw new Error("Empty AI response");
+        const [first, ...rest] = text.split("\n");
+        const head = (first ?? "").toUpperCase();
+        const verdict: KoreksiVerdict = head.includes("BENAR") ? "benar" : head.includes("HAMPIR") ? "hampir" : "salah";
+        return { ok: true, verdict, feedback: rest.join("\n").trim() || text };
+      } catch (error) {
+        console.error(`Koreksi: ${attempt.name} failed`, error);
+        lastError = error;
+      }
     }
+    return { ok: false, error: describeAiError(lastError).message };
   });

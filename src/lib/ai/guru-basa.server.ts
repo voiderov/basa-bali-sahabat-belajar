@@ -1,7 +1,7 @@
-import { convertToModelMessages, type UIMessage } from "ai";
+import { convertToModelMessages, createUIMessageStream, createUIMessageStreamResponse, type UIMessage } from "ai";
 import { z } from "zod";
 
-import { createChatCall, describeAiError } from "./gateway.server";
+import { chatAttempts, describeAiError, firstOutputOrError } from "./gateway.server";
 
 export type BasaLevel = "semua" | "alus" | "andap";
 
@@ -53,18 +53,28 @@ export async function handleGuruBasaChat(request: Request) {
 
   const messages = parsed.messages as UIMessage[];
   const modelMessages = await convertToModelMessages(messages);
-  const call = createChatCall(request, modelMessages, guruBasaInstructions(parsed.level));
-  if (!call) return Response.json({ error: "Konfigurasi AI belum lengkap di server." }, { status: 500 });
-  const { result, wrap } = call;
+  const attempts = chatAttempts(request, modelMessages, guruBasaInstructions(parsed.level));
+  if (attempts.length === 0) return Response.json({ error: "Konfigurasi AI belum lengkap di server." }, { status: 500 });
 
-  return wrap(
-    result.toUIMessageStreamResponse({
-      originalMessages: messages,
-      sendReasoning: true,
-      onError: (error) => {
-        console.error("Guru Basa error", error);
-        return describeAiError(error).message;
-      },
-    }),
-  );
+  const stream = createUIMessageStream({
+    originalMessages: messages,
+    execute: async ({ writer }) => {
+      let lastError: unknown = new Error("No AI backend available");
+      for (const attempt of attempts) {
+        const result = attempt.start();
+        const error = await firstOutputOrError(result);
+        if (error === null) {
+          writer.merge(result.toUIMessageStream({ sendReasoning: true }));
+          return;
+        }
+        console.error(`Guru Basa: ${attempt.name} failed, trying next backend`, error);
+        lastError = error;
+        if (request.signal.aborted) break;
+      }
+      throw lastError;
+    },
+    onError: (error) => describeAiError(error).message,
+  });
+
+  return createUIMessageStreamResponse({ stream });
 }
