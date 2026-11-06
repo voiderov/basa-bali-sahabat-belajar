@@ -76,6 +76,15 @@ export function ChatWindow({ threadId, initialQuestion }: { threadId: string; in
     saveThreadMessages(threadId, messages);
   }, [messages, status, threadId]);
 
+  // Also persist whatever has arrived when leaving this conversation mid-answer.
+  const latestMessages = useRef(messages);
+  latestMessages.current = messages;
+  useEffect(() => {
+    return () => {
+      if (latestMessages.current.length > 0) saveThreadMessages(threadId, latestMessages.current);
+    };
+  }, [threadId]);
+
   // Keep the composer focused when idle.
   useEffect(() => {
     if (!busy) textareaRef.current?.focus();

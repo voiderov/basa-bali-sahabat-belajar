@@ -21,7 +21,11 @@ export const Route = createFileRoute("/tentang")({
 const STACK = [
   { label: "Frontend", value: "React 19, TanStack Start, Tailwind CSS v4, komponen AI Elements" },
   { label: "Backend", value: "Server route & server function TanStack Start (edge runtime)" },
-  { label: "AI model / API", value: "Lovable AI Gateway → model OpenAI GPT (Responses API) via Vercel AI SDK" },
+  {
+    label: "AI model / API",
+    value:
+      "Google Gemini (gemini-3.8-flash) dengan kunci API tim sebagai model utama; cadangan otomatis Lovable AI Gateway (model OpenAI GPT) bila Gemini sedang penuh. Diakses lewat Vercel AI SDK.",
+  },
   { label: "Penyimpanan", value: "localStorage browser: riwayat chat & kemajuan belajar (tanpa login, tanpa data pribadi di server)" },
   { label: "Hosting", value: "Lovable (deploy otomatis)" },
   { label: "AI coding assistant", value: "Lovable AI agent untuk membantu menulis kode dan desain" },
@@ -94,8 +98,9 @@ function AboutPage() {
   ├─ Kursus & kuis ──────────────► data materi statis + kemajuan di localStorage
   ├─ Guru Basa (useChat) ── POST /api/chat ──► Server route
   │                                             └─ instruksi Guru Basa + riwayat
-  │                                                └─► Lovable AI Gateway (LLM, streaming)
-  └─ Latihan terjemahan ── server function koreksiTerjemahan ──► Lovable AI Gateway
+  │                                                └─► Google Gemini (LLM, streaming)
+  │                                                    └─ cadangan: Lovable AI Gateway
+  └─ Latihan terjemahan ── server function koreksiTerjemahan ──► Gemini / cadangan
 Riwayat chat ◄── disimpan per percakapan di localStorage (/chat/:threadId)`}
         </pre>
       </section>
