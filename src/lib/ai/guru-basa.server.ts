@@ -1,7 +1,7 @@
 import { convertToModelMessages, type UIMessage } from "ai";
 import { z } from "zod";
 
-import { createResponsesCall, describeAiError } from "./gateway.server";
+import { createChatCall, describeAiError } from "./gateway.server";
 
 export type BasaLevel = "semua" | "alus" | "andap";
 
@@ -44,9 +44,6 @@ const bodySchema = z.object({
 });
 
 export async function handleGuruBasaChat(request: Request) {
-  const apiKey = process.env['LOVABLE_API_KEY'];
-  if (!apiKey) return Response.json({ error: "Konfigurasi AI belum lengkap di server." }, { status: 500 });
-
   let parsed: z.infer<typeof bodySchema>;
   try {
     parsed = bodySchema.parse(await request.json());
@@ -56,14 +53,11 @@ export async function handleGuruBasaChat(request: Request) {
 
   const messages = parsed.messages as UIMessage[];
   const modelMessages = await convertToModelMessages(messages);
-  const { result, withRunId } = createResponsesCall(
-    request,
-    { apiKey, effort: "low" },
-    modelMessages,
-    guruBasaInstructions(parsed.level),
-  );
+  const call = createChatCall(request, modelMessages, guruBasaInstructions(parsed.level));
+  if (!call) return Response.json({ error: "Konfigurasi AI belum lengkap di server." }, { status: 500 });
+  const { result, wrap } = call;
 
-  return withRunId(
+  return wrap(
     result.toUIMessageStreamResponse({
       originalMessages: messages,
       sendReasoning: true,

@@ -14,10 +14,7 @@ const inputSchema = z.object({
 export const koreksiTerjemahan = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => inputSchema.parse(input))
   .handler(async ({ data }): Promise<KoreksiResult> => {
-    const apiKey = process.env['LOVABLE_API_KEY'];
-    if (!apiKey) return { ok: false, error: "Konfigurasi AI belum lengkap di server." };
-
-    const { createResponsesCall, describeAiError } = await import("./gateway.server");
+    const { createChatCall, describeAiError } = await import("./gateway.server");
     const instructions = `Anda adalah pemeriksa latihan Basa Bali untuk pelajar pemula.
 Tugas: nilai terjemahan pelajar dari Bahasa Indonesia ke Basa Bali.
 Terima variasi yang benar (sinonim, tingkat bahasa lain yang masih tepat, ejaan wajar, huruf besar/kecil, tanda baca) sebagai benar.
@@ -30,13 +27,10 @@ Jawaban pelajar: "${data.answer}"`;
 
     try {
       const request = new Request("https://local/koreksi");
-      const { result } = createResponsesCall(
-        request,
-        { apiKey, effort: "low" },
-        [{ role: "user", content: userText }],
-        instructions,
-      );
-      const text = (await result.text).trim();
+      const call = createChatCall(request, [{ role: "user", content: userText }], instructions);
+      if (!call) return { ok: false, error: "Konfigurasi AI belum lengkap di server." };
+      const text = (await call.result.text).trim();
+      const _unused = (await result.text).trim();
       if (!text) return { ok: false, error: "AI tidak memberikan jawaban. Coba lagi." };
       const [first, ...rest] = text.split("\n");
       const head = (first ?? "").toUpperCase();
