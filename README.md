@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="/src/assets/icon.png" alt="Mabasa Hero Banner" width="100%">
+  <img src="/src/assets/guru-basa.png" alt="Mabasa Hero Banner" width="30%">
 
   # ᬫᬩᬲ (Mabasa) - Basa Bali Sahabat Belajar
   
