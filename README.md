@@ -3,7 +3,8 @@
 
   # ᬫᬩᬲ (Mabasa) - Basa Bali Sahabat Belajar
   
-  **Belajar Basa Bali, ditemani Guru Basa AI.** <br>
+  **Belajar Basa Bali, ditemani Guru Basa 
+  AI.** <br>
   Kursus singkat untuk pelajar dan pendatang, plus tutor AI yang menjawab pertanyaanmu dalam Bahasa Indonesia maupun English.
 
   [![GitHub repo size](https://img.shields.io/github/repo-size/voiderov/basa-bali-sahabat-belajar)](https://github.com/voiderov/basa-bali-sahabat-belajar)
@@ -99,8 +100,8 @@ SMA Negeri 2 Kuta Selatan
 
 - **Library open-source:** React, TanStack Start/Router, Vite, Tailwind CSS, shadcn-ui, dan lainnya; mengikuti lisensi masing-masing (daftar di `package.json`).
 - **Model/API:** Gemini API.
-- **AI-assisted development:** Lovable.
-- **Aset visual:** Gemini.
+- **AI-assisted development:** Lovable, Minimax, KIMI agent.
+- **Aset visual:** Gemini, Stable Diffusion.
 - **Status pengembangan:** seluruh fitur dibangun selama periode kompetisi; tidak ada produk sebelumnya.
 - **Lisensi proyek:** [MIT](LICENSE).
 
